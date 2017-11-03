@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteCond %{REQUEST_SCHEME} ^http$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=302]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
