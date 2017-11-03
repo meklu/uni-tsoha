@@ -1,7 +1,7 @@
 # Tietokantasovelluksen harjoitustyö
 
-* [Linkki sovellukseen](https://melker.users.cs.helsinki.fi/)
-* [Linkki dokumentaatioon](https://github.com/meklu/uni-tsoha/doc/dokumentaatio.pdf)
+* [Linkki sovellukseen](https://melker.users.cs.helsinki.fi/uni-tsoha/)
+* [Linkki dokumentaatioon](https://github.com/meklu/uni-tsoha/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
