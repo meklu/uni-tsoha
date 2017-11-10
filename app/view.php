@@ -25,12 +25,20 @@ class View {
 		$this->exportParams[$key] = $value;
 	}
 
+	/** Piirtää näkymän käyttäen $this:n välimuistia */
+	function cachedRender($vkey) {
+		if (!isset($this->renderCache[$vkey]) || $this->params[$vkey]->alwaysRender) {
+			$this->renderCache[$vkey] = $this->params[$vkey]->render();
+		}
+		return $this->renderCache[$vkey];
+	}
+
 	/** Tuo jonkin näkymän vientiparametrit */
-	function importParams($view) {
+	function importParams($vkey) {
 		/* Rendataan ensin parametrien generoimiseksi */
-		$view->render();
+		$this->cachedRender($vkey);
 		/* Tuodaan arvot */
-		foreach ($view->exportParams as $k => $v) {
+		foreach ($this->params[$vkey]->exportParams as $k => $v) {
 			$this->setParam($k, $v);
 		}
 	}
@@ -45,18 +53,15 @@ class View {
 		if (is_string($this->params[$key])) {
 			echo $this->params[$key];
 		} else if (is_a($this->params[$key], "View")) {
-			if (!isset($this->renderCache[$key]) || $this->params[$key]->alwaysRender) {
-				$this->renderCache[$key] = $this->params[$key]->render();
-			}
-			echo $this->renderCache[$key];
+			echo $this->cachedRender($key);
 		}
 	}
 
 	/** Palauttaa merkkijonon! */
 	function render() {
-		foreach ($this->params as $p) {
-			if (is_a($p, "View")) {
-				$this->importParams($p);
+		foreach ($this->params as $k => $v) {
+			if (is_a($v, "View")) {
+				$this->importParams($k);
 			}
 		}
 		unset($p);
