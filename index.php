@@ -1,11 +1,6 @@
 <?php
 
-# Hakemisto, jossa index.php:mme elää
-define("BASE_DIR", dirname($_SERVER["SCRIPT_NAME"]));
-
-define("REQ_URL", substr_replace($_SERVER["REQUEST_URI"], "", 0, strlen(BASE_DIR)));
-
-define("APP_ROUTE", explode("/", explode("?", ltrim(REQ_URL, "/"))[0]));
+require __DIR__ . "/app/boot.php";
 
 ?>
 <!DOCTYPE html>
@@ -19,6 +14,7 @@ define("APP_ROUTE", explode("/", explode("?", ltrim(REQ_URL, "/"))[0]));
 		<p><?php echo time(); ?></p>
 		<pre><?php echo 'BASE_DIR = ' . htmlspecialchars(var_export(BASE_DIR, true)) . "\n"; ?></pre>
 		<pre><?php echo 'REQ_URL = ' . htmlspecialchars(var_export(REQ_URL, true)) . "\n"; ?></pre>
+		<pre><?php echo 'REQ_METHOD = ' . htmlspecialchars(var_export(REQ_METHOD, true)) . "\n"; ?></pre>
 		<pre><?php echo 'APP_ROUTE = ' . htmlspecialchars(var_export(APP_ROUTE, true)) . "\n"; ?></pre>
 	</body>
 </html>
