@@ -7,6 +7,7 @@ CREATE TABLE Account (
 
 CREATE TABLE Priority (
 	id SERIAL PRIMARY KEY,
+	account_id INTEGER REFERENCES Account(id),
 	priority INTEGER, -- isompi tärkeämpi, "baseline" 0
 	name VARCHAR(64)
 );
