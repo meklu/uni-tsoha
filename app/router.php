@@ -37,7 +37,7 @@ class Router {
 		$ok = array("get", "post", "delete", "put");
 		$lkup = array_flip($ok);
 		if (!isset($lkup[$reqtype])) {
-			throw Exception("Request method '$reqtype' not allowed for route");
+			throw new Exception("Request method '$reqtype' not allowed for route");
 		}
 
 		if (!isset($this->r[$reqtype])) {
@@ -83,14 +83,14 @@ class Router {
 		$pos = $this->r[$checkm];
 		foreach (APP_ROUTE as $p) {
 			if (!isset($pos["children"][$p])) {
-				throw Exception("Path not found in route");
+				throw new Exception("Path not found in route");
 			}
 			$pos = $pos["children"][$p];
 		}
 		if (is_callable($pos["f"])) {
 			$pos["f"]();
 		} else {
-			throw Exception("Resolved route has no callable!");
+			throw new Exception("Resolved route has no callable!");
 		}
 	}
 }

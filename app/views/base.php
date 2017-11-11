@@ -8,9 +8,11 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="<?php echo BASE_DIR; ?>/assets/site.css" />
-		<title><?php $this->pS("title"); ?></title>
+		<title><?php $this->pS("title"); ?> - Muistilista</title>
 	</head>
 	<body>
-		<?php $this->pH("content"); ?>
+		<div id="main-container">
+			<?php $this->pH("content"); ?>
+		</div>
 	</body>
 </html>
