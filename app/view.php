@@ -45,11 +45,17 @@ class View {
 
 	/** Tulostaa merkkijonoparametrin $key turvallisesti */
 	function pS($key) {
+		if (!isset($this->params[$key])) {
+			return;
+		}
 		echo htmlspecialchars($this->params[$key]);
 	}
 
 	/** Tulostaa HTML-parametrin $key, ts. raa'an merkkijonon, tai näkymäparametrin */
 	function pH($key) {
+		if (!isset($this->params[$key])) {
+			return;
+		}
 		if (is_string($this->params[$key])) {
 			echo $this->params[$key];
 		} else if (is_a($this->params[$key], "View")) {
