@@ -2,3 +2,16 @@
 	padding: 25vh 25vw;
 	text-align: center;
 }
+
+#login-container form {
+	padding: 1em;
+	box-shadow: 0 0 1.7em gray;
+}
+
+th {
+	background-color: #ffdddd;
+}
+
+td {
+	border: 1px solid gray;
+}
