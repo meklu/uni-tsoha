@@ -1,9 +1,9 @@
-DROP TABLE Account;
+DROP TABLE Account CASCADE;
 
-DROP TABLE Priority;
+DROP TABLE Priority CASCADE;
 
-DROP TABLE Task;
+DROP TABLE Task CASCADE;
 
-DROP TABLE Category;
+DROP TABLE Category CASCADE;
 
-DROP TABLE TaskCategory;
+DROP TABLE TaskCategory CASCADE;
