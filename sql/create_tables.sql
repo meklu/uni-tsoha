@@ -20,6 +20,7 @@ CREATE TABLE Task (
 
 CREATE TABLE Category (
 	id SERIAL PRIMARY KEY,
+	account_id INTEGER REFERENCES Account(id),
 	name VARCHAR(64)
 );
 
