@@ -16,7 +16,7 @@ hyvinkin paljon.
 * [Linkki kirjautumissivulle](https://melker.users.cs.helsinki.fi/uni-tsoha/login)
 * [Linkki "etusivulle"](https://melker.users.cs.helsinki.fi/uni-tsoha/dash)
 * [Linkki askarelistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/tasks)
-* [Linkki askareen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/tasks)
+* [Linkki askareen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/tasks/add)
 * [Linkki käyttäjälistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/users)
 * [Linkki käyttäjän lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/users/add)
 * [Linkki tärkeysastelistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/priorities)
