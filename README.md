@@ -9,9 +9,9 @@ Tämän työn aiheena on [muistilista](http://advancedkittenry.github.io/suunnit
 
 ## Viikko 2
 
-Kaikki näistä ovat toistaiseksi enimmäkseen mock-upia. Huomionarvoista on
-se, että muokkaussivut tulisivat todennäköisesti muistuttamaan lisäyssivuja
-hyvinkin paljon.
+Kaikki näistä ovat toistaiseksi enimmäkseen erittäin karkeaa mock-upia.
+Huomionarvoista on se, että muokkaussivut/-elementit tulisivat todennäköisesti
+muistuttamaan lisäyssivuja hyvinkin paljon.
 
 * [Linkki kirjautumissivulle](https://melker.users.cs.helsinki.fi/uni-tsoha/login)
 * [Linkki "etusivulle"](https://melker.users.cs.helsinki.fi/uni-tsoha/dash)
