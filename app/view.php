@@ -70,7 +70,7 @@ class View {
 				$this->importParams($k);
 			}
 		}
-		unset($p);
+		unset($k, $v);
 		ob_start();
 		include $this->path;
 		return ob_get_clean();
