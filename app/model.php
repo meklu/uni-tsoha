@@ -1,7 +1,7 @@
 <?php
 
 class Model {
-	function __construct($attr) {
+	function __construct($attr = array()) {
 		foreach ($attr as $k => $v) {
 			if (property_exists($this, $k)) {
 				$this->{$k} = $v;

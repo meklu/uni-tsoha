@@ -31,6 +31,22 @@ $router->get("/users/add", function () {
 	HejsanController::users_add();
 });
 
+$router->get("/accounts", function () {
+	AccountController::index();
+});
+
+$router->get("/accounts/:id", function ($a) {
+	AccountController::show($a["id"]);
+});
+
+$router->get("/accounts/add", function () {
+	AccountController::addview();
+});
+
+$router->post("/accounts/add", function () {
+	AccountController::add();
+});
+
 $router->get("/priorities", function () {
 	HejsanController::priorities();
 });

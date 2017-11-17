@@ -6,7 +6,7 @@ class Account extends Model {
 	public $password;
 	public $admin;
 
-	function __construct($attr) {
+	function __construct($attr = array()) {
 		parent::__construct($attr);
 	}
 
