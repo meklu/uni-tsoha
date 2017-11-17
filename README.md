@@ -23,3 +23,7 @@ muistuttamaan lisäyssivuja hyvinkin paljon.
 * [Linkki tärkeysasteen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/priorities/add)
 * [Linkki luokituslistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/categories)
 * [Linkki luokituksen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/categories/add)
+
+## Viikko 3
+
+Toteutettu alustava käyttäjämalli (Account) ja siihen liittyvät muut palat.
