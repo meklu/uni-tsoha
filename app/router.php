@@ -52,7 +52,7 @@ class Router {
 		$pos = &$this->r[$reqtype];
 		foreach ($parts as $p) {
 			unset($key);
-			if ($p[0] === ':') {
+			if (strlen($p) > 0 && $p[0] === ':') {
 				$key = substr($p, 1);
 				$p = $p[0];
 			}
