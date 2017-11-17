@@ -1,6 +1,8 @@
 <?php
 
-/** Kohtuullisen yksinkertainen reititin. Riippuvainen boot.php:n vakioista.  */
+/** Kohtuullisen yksinkertainen reititin. Riippuvainen boot.php:n vakioista.
+ *
+ * Tukee myös "/foo/:bar" -notaatiota reittipoluille. */
 class Router {
 	/* array(
 	 *    "get" => array(
@@ -49,11 +51,19 @@ class Router {
 		$parts = $this->pathparts($path);
 		$pos = &$this->r[$reqtype];
 		foreach ($parts as $p) {
+			unset($key);
+			if ($p[0] === ':') {
+				$key = substr($p, 1);
+				$p = $p[0];
+			}
 			if (!isset($pos["children"][$p])) {
 				$pos["children"][$p] = array(
 					"f" => null,
 					"children" => array()
 				);
+				if (isset($key)) {
+					$pos["children"][$p]["key"] = $key;
+				}
 			}
 			$pos = &$pos["children"][$p];
 		}
@@ -77,18 +87,22 @@ class Router {
 	}
 
 	/** Reitin seuranta */
-	/* TODO: esim. /foo/:id */
 	function run() {
 		$checkm = strtolower(REQ_METHOD);
 		$pos = $this->r[$checkm];
+		$attr = array();
 		foreach (APP_ROUTE as $p) {
 			if (!isset($pos["children"][$p])) {
-				throw new Exception("Path not found in route");
+				if (!isset($pos["children"][':'])) {
+					throw new Exception("Path not found in route");
+				}
+				$attr[$pos["children"][':']["key"]] = $p;
+				$p = ':';
 			}
 			$pos = $pos["children"][$p];
 		}
 		if (is_callable($pos["f"])) {
-			$pos["f"]();
+			$pos["f"]($attr);
 		} else {
 			throw new Exception("Resolved route has no callable!");
 		}
