@@ -1,40 +1,4 @@
 <?php
-$router->get("/", function () {
-	Redirect::to("/login");
-});
-
-$router->get("/psufh", function () {
-	HejsanController::psufh();
-});
-
-$router->get("/login", function () {
-	HejsanController::login();
-});
-
-$router->get("/dash", function () {
-	HejsanController::dash();
-});
-
-$router->get("/tasks", function () {
-	HejsanController::tasks();
-});
-
-$router->get("/tasks/add", function () {
-	HejsanController::tasks_add();
-});
-
-$router->get("/users", function () {
-	HejsanController::users();
-});
-
-$router->get("/users/add", function () {
-	HejsanController::users_add();
-});
-
-$router->get("/accounts", function () {
-	AccountController::index();
-});
-
 $router->get("/accounts/:id", function ($a) {
 	AccountController::show($a["id"]);
 });
@@ -47,18 +11,58 @@ $router->post("/accounts/add", function () {
 	AccountController::add();
 });
 
-$router->get("/priorities", function () {
+$router->get("/accounts", function () {
+	AccountController::index();
+});
+
+/* Testijuttu */
+
+$router->get("/psufh", function () {
+	HejsanController::psufh();
+});
+
+/* Mockupit */
+
+$router->get("/", function () {
+	Redirect::to("/mock/login");
+});
+
+$router->get("/mock/login", function () {
+	HejsanController::login();
+});
+
+$router->get("/mock/dash", function () {
+	HejsanController::dash();
+});
+
+$router->get("/mock/tasks", function () {
+	HejsanController::tasks();
+});
+
+$router->get("/mock/tasks/add", function () {
+	HejsanController::tasks_add();
+});
+
+$router->get("/mock/users", function () {
+	HejsanController::users();
+});
+
+$router->get("/mock/users/add", function () {
+	HejsanController::users_add();
+});
+
+$router->get("/mock/priorities", function () {
 	HejsanController::priorities();
 });
 
-$router->get("/priorities/add", function () {
+$router->get("/mock/priorities/add", function () {
 	HejsanController::priorities_add();
 });
 
-$router->get("/categories", function () {
+$router->get("/mock/categories", function () {
 	HejsanController::categories();
 });
 
-$router->get("/categories/add", function () {
+$router->get("/mock/categories/add", function () {
 	HejsanController::categories_add();
 });

@@ -13,13 +13,13 @@ Kaikki näistä ovat toistaiseksi enimmäkseen erittäin karkeaa mock-upia.
 Huomionarvoista on se, että muokkaussivut/-elementit tulisivat todennäköisesti
 muistuttamaan lisäyssivuja hyvinkin paljon.
 
-* [Linkki kirjautumissivulle](https://melker.users.cs.helsinki.fi/uni-tsoha/login)
-* [Linkki "etusivulle"](https://melker.users.cs.helsinki.fi/uni-tsoha/dash)
-* [Linkki askarelistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/tasks)
-* [Linkki askareen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/tasks/add)
-* [Linkki käyttäjälistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/users)
-* [Linkki käyttäjän lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/users/add)
-* [Linkki tärkeysastelistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/priorities)
-* [Linkki tärkeysasteen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/priorities/add)
-* [Linkki luokituslistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/categories)
-* [Linkki luokituksen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/categories/add)
+* [Linkki kirjautumissivulle](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/login)
+* [Linkki "etusivulle"](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/dash)
+* [Linkki askarelistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/tasks)
+* [Linkki askareen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/tasks/add)
+* [Linkki käyttäjälistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/users)
+* [Linkki käyttäjän lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/users/add)
+* [Linkki tärkeysastelistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/priorities)
+* [Linkki tärkeysasteen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/priorities/add)
+* [Linkki luokituslistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/categories)
+* [Linkki luokituksen lisäämiseen](https://melker.users.cs.helsinki.fi/uni-tsoha/mock/categories/add)
