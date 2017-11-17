@@ -1,8 +1,21 @@
 <?php
 
 class Redirect {
+	protected static function calc($path) {
+		return BASE_DIR . $path;
+	}
+
+	protected static function soft($path) {
+		header("Location: " . self::calc($path));
+	}
+
 	public static function to($path) {
-		header("Location: " . BASE_DIR . $path);
+		self::soft($path);
 		exit();
+	}
+
+	public static function html($path) {
+		self::soft($path);
+		echo "<a href=\"" . self::calc($path) . "\">Paina tästä</a>, mikäli selaimesi ei uudelleenohjaa sinua.\n";
 	}
 }
