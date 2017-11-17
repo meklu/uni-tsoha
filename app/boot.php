@@ -10,6 +10,7 @@ define("APP_ROUTE", explode("/", explode("?", ltrim(REQ_URL, "/"))[0]));
 
 require __DIR__ . "/redirect.php";
 require __DIR__ . "/router.php";
+require __DIR__ . "/model.php";
 require __DIR__ . "/view.php";
 require __DIR__ . "/controller.php";
 require __DIR__ . "/database.php";
