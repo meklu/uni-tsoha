@@ -11,11 +11,11 @@ class Account extends Model {
 	}
 
 	function all() {
-		return _all();
+		return $this->_all();
 	}
 
 	function find($id) {
-		return _find($id);
+		return $this->_find($id);
 	}
 
 	function save() {
