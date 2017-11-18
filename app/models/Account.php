@@ -19,19 +19,10 @@ class Account extends Model {
 	}
 
 	function save() {
-		$db = Database::conn();
-		$q = $db->prepare("INSERT INTO Account (nick, password, admin) VALUES (:nick, :password, :admin) RETURNING id");
-		$q->bindValue(":nick", $this->nick, PDO::PARAM_STR);
-		$q->bindValue(":password", $this->password, PDO::PARAM_STR);
-		$q->bindValue(":admin", $this->admin, PDO::PARAM_BOOL);
-		$q->execute();
-
-		$row = $q->fetch(PDO::FETCH_ASSOC);
-		if (!$row) {
-			return null;
-		}
-
-		$this->id = $row["id"];
-		return $this;
+		return $this->_save(array(
+			"nick" => PDO::PARAM_STR,
+			"password" => PDO::PARAM_STR,
+			"admin" => PDO::PARAM_BOOL,
+		));
 	}
 }

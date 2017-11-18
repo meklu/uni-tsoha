@@ -50,4 +50,35 @@ class Model {
 
 		return new static($row);
 	}
+
+	/** @param array $fields Oleelliset kentät muotoa seuraava:
+	 * array(
+	 *    "<kenttä>" => PDO::PARAM_<TYYPPI>,
+	 * )
+	 */
+	protected function _save($fields) {
+		$fkeys = array_keys($fields);
+		$fstr = implode(", ", $fkeys);
+		$fsub = array();
+		foreach ($fkeys as $f) {
+			$fsub[] = ':' . $f;
+		}
+		$fsubstr = implode(", ", $fsub);
+
+		$db = Database::conn();
+
+		$q = $db->prepare("INSERT INTO " . static::class . " ({$fstr}) VALUES ({$fsubstr}) RETURNING id");
+		foreach ($fields as $field => $type) {
+			$q->bindValue(":{$field}", $this->{$field}, $type);
+		}
+		$q->execute();
+
+		$row = $q->fetch(PDO::FETCH_ASSOC);
+		if (!$row) {
+			return null;
+		}
+
+		$this->id = $row["id"];
+		return $this;
+	}
 }
