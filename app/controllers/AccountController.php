@@ -2,8 +2,7 @@
 
 class AccountController extends Controller {
 	public static function index() {
-		$a = new Account();
-		$data = $a->all();
+		$data = Account::all();
 		$bv = new View("base", array(
 			"content" => new View("accounts/list", array(
 				"accounts" => $data,
@@ -13,8 +12,7 @@ class AccountController extends Controller {
 	}
 
 	public static function show($id) {
-		$a = new Account();
-		$a = $a->find($id);
+		$a = Account::find($id);
 		if (!$a) {
 			http_response_code(404);
 		}
@@ -40,10 +38,10 @@ class AccountController extends Controller {
 		$attr["admin"] = (isset($_POST["admin"]) && $_POST["admin"]) ? true : false;
 
 		$acc = new Account($attr);
-		$acc = $acc->save();
+		Account::save($acc);
 
 		$path = "/accounts";
-		if ($acc && is_int($acc->id)) {
+		if (is_int($acc->id)) {
 			$path .= "/{$acc->id}";
 		}
 		$bv = new View("base", array(

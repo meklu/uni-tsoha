@@ -6,20 +6,20 @@ class Account extends Model {
 	public $password;
 	public $admin;
 
-	function __construct($attr = array()) {
+	function __construct($attr) {
 		parent::__construct($attr);
 	}
 
-	function all() {
-		return $this->_all();
+	static function all() {
+		return static::_all();
 	}
 
-	function find($id) {
-		return $this->_find($id);
+	static function find($id) {
+		return static::_find($id);
 	}
 
-	function save() {
-		return $this->_save(array(
+	static function save($object) {
+		return static::_save($object, array(
 			"nick" => PDO::PARAM_STR,
 			"password" => PDO::PARAM_STR,
 			"admin" => PDO::PARAM_BOOL,

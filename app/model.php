@@ -1,7 +1,7 @@
 <?php
 
 class Model {
-	function __construct($attr = array()) {
+	function __construct($attr) {
 		foreach ($attr as $k => $v) {
 			if (property_exists($this, $k)) {
 				$this->{$k} = $v;
@@ -22,7 +22,7 @@ class Model {
 		return $ret;
 	}
 
-	protected function _all() {
+	protected static function _all() {
 		$db = Database::conn();
 		$q = $db->prepare("SELECT * FROM " . static::class);
 		$q->execute();
@@ -37,7 +37,7 @@ class Model {
 		return $ret;
 	}
 
-	protected function _find($id) {
+	protected static function _find($id) {
 		$db = Database::conn();
 		$q = $db->prepare("SELECT * FROM " . static::class . " WHERE id = :id LIMIT 1");
 		$q->bindValue(":id", $id, PDO::PARAM_INT);
@@ -56,7 +56,7 @@ class Model {
 	 *    "<kenttä>" => PDO::PARAM_<TYYPPI>,
 	 * )
 	 */
-	protected function _save($fields) {
+	protected static function _save($object, $fields) {
 		$fkeys = array_keys($fields);
 		$fstr = implode(", ", $fkeys);
 		$fsub = array();
@@ -69,7 +69,7 @@ class Model {
 
 		$q = $db->prepare("INSERT INTO " . static::class . " ({$fstr}) VALUES ({$fsubstr}) RETURNING id");
 		foreach ($fields as $field => $type) {
-			$q->bindValue(":{$field}", $this->{$field}, $type);
+			$q->bindValue(":{$field}", $object->{$field}, $type);
 		}
 		$q->execute();
 
@@ -78,7 +78,7 @@ class Model {
 			return null;
 		}
 
-		$this->id = $row["id"];
-		return $this;
+		$object->id = $row["id"];
+		return $object;
 	}
 }
