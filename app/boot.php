@@ -14,6 +14,7 @@ require __DIR__ . "/model.php";
 require __DIR__ . "/view.php";
 require __DIR__ . "/controller.php";
 require __DIR__ . "/database.php";
+require __DIR__ . "/asset.php";
 
 spl_autoload_register(function ($class) {
 	$dirs = array(
