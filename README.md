@@ -28,4 +28,6 @@ muistuttamaan lisäyssivuja hyvinkin paljon.
 
 Toteutettu alustava käyttäjämalli (Account) ja siihen liittyvät muut palat.
 
-* [Linkki käyttäjälistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/accounts).
+* [Linkki käyttäjälistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/accounts)
+
+Osallistuttu myös koodikatselmointiin ([maggaou/Tsoha-Bootstrap#1](https://github.com/maggaou/Tsoha-Bootstrap/issues/1)).
