@@ -27,3 +27,5 @@ muistuttamaan lisäyssivuja hyvinkin paljon.
 ## Viikko 3
 
 Toteutettu alustava käyttäjämalli (Account) ja siihen liittyvät muut palat.
+
+* [Linkki käyttäjälistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/accounts).
