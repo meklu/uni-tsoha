@@ -14,9 +14,13 @@ class AccountController extends Controller {
 
 	public static function show($id) {
 		$a = new Account();
+		$a = $a->find($id);
+		if (!$a) {
+			http_response_code(404);
+		}
 		$bv = new View("base", array(
 			"content" => new View("accounts/show", array(
-				"account" => $a->find($id),
+				"account" => $a,
 			)),
 		));
 		echo $bv->render();
