@@ -21,6 +21,14 @@ td {
 	border: 1px solid gray;
 }
 
+tbody > tr {
+	background-color: #f0f0ff;
+}
+
+tbody > tr:nth-of-type(even) {
+	background-color: #f0fff0;
+}
+
 .error-block {
 	background-color: #ff2323;
 	color: #ffdcdc;
