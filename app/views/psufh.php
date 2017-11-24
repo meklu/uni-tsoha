@@ -9,3 +9,4 @@ $this->exportParam("title", "Fsuh");
 <pre><?php echo 'REQ_URL = ' . htmlspecialchars(var_export(REQ_URL, true)) . "\n"; ?></pre>
 <pre><?php echo 'REQ_METHOD = ' . htmlspecialchars(var_export(REQ_METHOD, true)) . "\n"; ?></pre>
 <pre><?php echo 'APP_ROUTE = ' . htmlspecialchars(var_export(APP_ROUTE, true)) . "\n"; ?></pre>
+<pre><?php echo '$_SESSION = ' . htmlspecialchars(var_export($_SESSION, true)) . "\n"; ?></pre>

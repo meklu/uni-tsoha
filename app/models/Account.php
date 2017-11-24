@@ -13,6 +13,10 @@ class Account extends Model {
 		);
 	}
 
+	function verifyPassword($plain) {
+		return password_verify($plain, $this->password);
+	}
+
 	function validate_nick() {
 		$err = array();
 		$min = 3;
@@ -26,12 +30,24 @@ class Account extends Model {
 		return $err;
 	}
 
+	static function _validate_plaintext_password($password) {
+		$err = array();
+		if (strlen($password) === 0) {
+			$err[] = "Salasana ei saa olla tyhjä!";
+		}
+		return $err;
+	}
+
 	static function all() {
 		return static::_all("nick");
 	}
 
 	static function find($id) {
 		return static::_find($id);
+	}
+
+	static function findByNick($nick) {
+		return static::_findByField("nick", $nick, PDO::PARAM_STR);
 	}
 
 	static function save($object) {

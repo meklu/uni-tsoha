@@ -7,6 +7,14 @@ class HejsanController extends Controller {
 		echo $bv->render();
 	}
 
+	public static function html($title, $content) {
+		$bv = new View("base", array(
+			"title" => $title,
+			"content" => $content,
+		));
+		echo $bv->render();
+	}
+
 	public static function login() {
 		$bv = new View("base");
 		$bv->setParam("content", new View("mockup/login"));

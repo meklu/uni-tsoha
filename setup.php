@@ -34,9 +34,9 @@ do {
 
 	system("stty -echo");
 	echo "Syötä salasana: ";
-	$pass = lue();
+	$plain = lue();
 	system("stty echo");
-	$pass = password_hash($pass, PASSWORD_DEFAULT);
+	$pass = password_hash($plain, PASSWORD_DEFAULT);
 	echo "\n";
 
 	$a = new Account(array(
@@ -46,6 +46,8 @@ do {
 	));
 
 	$err = $a->errors();
+	$err = array_merge($err, Account::_validate_plaintext_password($plain));
+	unset($plain);
 	if (count($err) > 0) {
 		echo "Käyttäjätunnus ei täytä vaatimuksia!\n";
 		foreach ($err as $e) {

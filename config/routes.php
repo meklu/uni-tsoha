@@ -1,4 +1,25 @@
 <?php
+/* Kirjautuminen */
+
+$router->get("/", function () {
+	Controller::check_logged_in();
+	HejsanController::html(
+		"Placeholder",
+		"<h1>Moi!</h1>\n" .
+		"<a href=\"" . BASE_DIR . "/accounts\">Käyttäjälistaukseen</a>"
+	);
+});
+
+$router->get("/login", function () {
+	LoginController::loginview();
+});
+
+$router->post("/login", function () {
+	LoginController::login();
+});
+
+/* Tietueet */
+
 $router->get("/accounts/:id", function ($a) {
 	# ...$foo ei toimi string-avaimilla :D
 	AccountController::show(...array_values($a));
@@ -56,10 +77,6 @@ $router->get("/psufh", function () {
 });
 
 /* Mockupit */
-
-$router->get("/", function () {
-	Redirect::to("/mock/login");
-});
 
 $router->get("/mock/login", function () {
 	HejsanController::login();

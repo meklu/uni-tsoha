@@ -40,6 +40,15 @@ class AccountController extends Controller {
 		$acc = new Account($attr);
 		$err = $acc->errors();
 
+		/* Tätä ei välttämättä ole mielekästä validoida muokatessa, koska tuolloin
+		 * tyhjällä salasanalla voidaan helposti tarkoittaa salasanan muokkaamatta
+		 * jättämistä kuten sovelluksessamme tehdäänkin. Tämän tosin voisi
+		 * kontekstiparametrittaa mallille itselleen esim. $account->errors("add")
+		 * Olemme tosin ongelmien äärellä, sillä plaintext-salasanaa ei koskaan
+		 * talleteta Account-olioon. Jippii? Erillinen staattinen metodi mallille
+		 * mielivaltaista plaintext-passua varten lienee OK vaihtoehto. */
+		$err = array_merge($err, Account::_validate_plaintext_password($_POST["password"]));
+
 		if (count($err) === 0) {
 			Account::save($acc);
 		}
@@ -51,6 +60,9 @@ class AccountController extends Controller {
 			$data["success"] = array("Käyttäjä luotu onnistuneesti!");
 		} else {
 			$path .= "/add";
+			if (count($err) === 0) {
+				$err[] = "Tietokantavirhe";
+			}
 			$data["errors"] = $err;
 			$attr["password"] = $_POST["password"];
 			$data["attr"] = $attr;

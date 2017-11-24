@@ -50,9 +50,13 @@ class Model {
 	}
 
 	protected static function _find($id) {
+		return static::_findByField("id", $id, PDO::PARAM_INT);
+	}
+
+	protected static function _findByField($field, $value, $type) {
 		$db = Database::conn();
-		$q = $db->prepare("SELECT * FROM " . static::class . " WHERE id = :id LIMIT 1");
-		$q->bindValue(":id", $id, PDO::PARAM_INT);
+		$q = $db->prepare("SELECT * FROM " . static::class . " WHERE {$field} = :{$field} LIMIT 1");
+		$q->bindValue(":{$field}", $value, $type);
 		$q->execute();
 
 		$row = $q->fetch(PDO::FETCH_ASSOC);
