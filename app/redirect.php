@@ -23,6 +23,7 @@ class Redirect {
 
 	public static function view($path, $userdata = array()) {
 		$bv = new View("base", array(
+			"dirty" => true,
 			"title" => "Uudelleenohjaus",
 			"content" => static::html($path, $userdata),
 		));
