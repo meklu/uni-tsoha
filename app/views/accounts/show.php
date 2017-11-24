@@ -8,10 +8,8 @@ if ($a) {
 ?>
 <h1><?= htmlspecialchars($this->exportParams["title"]) ?></h1>
 <p><a href="<?= BASE_DIR ?>/accounts">← Takaisin</a></p>
-<?php
-if ($a) {
-?>
+<p><a href="<?= BASE_DIR . REQ_URL ?>/edit">Muokkaa</a></p>
+<?php if ($a) { ?>
 <p><p>Nimimerkki</p><p><?= htmlspecialchars($a->nick) ?></p></p>
 <p><p>Ylläpitäjä</p><p><?= ($a->admin) ? "On" : "Ei" ?></p></p>
-<?php
-}
+<?php }

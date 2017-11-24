@@ -11,7 +11,7 @@ class Account extends Model {
 	}
 
 	static function all() {
-		return static::_all();
+		return static::_all("nick");
 	}
 
 	static function find($id) {
@@ -20,6 +20,14 @@ class Account extends Model {
 
 	static function save($object) {
 		return static::_save($object, array(
+			"nick" => PDO::PARAM_STR,
+			"password" => PDO::PARAM_STR,
+			"admin" => PDO::PARAM_BOOL,
+		));
+	}
+
+	static function update($object) {
+		return static::_update($object, array(
 			"nick" => PDO::PARAM_STR,
 			"password" => PDO::PARAM_STR,
 			"admin" => PDO::PARAM_BOOL,

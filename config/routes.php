@@ -1,6 +1,7 @@
 <?php
 $router->get("/accounts/:id", function ($a) {
-	AccountController::show($a["id"]);
+	# ...$foo ei toimi string-avaimilla :D
+	AccountController::show(...array_values($a));
 });
 
 $router->get("/accounts/add", function () {
@@ -9,6 +10,14 @@ $router->get("/accounts/add", function () {
 
 $router->post("/accounts/add", function () {
 	AccountController::add();
+});
+
+$router->get("/accounts/:id/edit", function ($a) {
+	AccountController::editview(...array_values($a));
+});
+
+$router->post("/accounts/:id/edit", function ($a) {
+	AccountController::edit(...array_values($a));
 });
 
 $router->get("/accounts", function () {
