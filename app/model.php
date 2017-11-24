@@ -122,10 +122,6 @@ class Model {
 	}
 
 	protected static function _delete($id) {
-		if (!is_int($id)) {
-			return false;
-		}
-
 		$db = Database::conn();
 
 		$q = $db->prepare("DELETE FROM " . static::class . " WHERE id = :id RETURNING 1 AS one");

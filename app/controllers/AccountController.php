@@ -107,7 +107,6 @@ class AccountController extends Controller {
 	}
 
 	public static function delete($id) {
-		$id = intval($id);
 		$path = "/accounts";
 		$res = Account::delete($id);
 		$data = array();
