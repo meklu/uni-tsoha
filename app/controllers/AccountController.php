@@ -45,18 +45,17 @@ class AccountController extends Controller {
 		}
 
 		$path = "/accounts";
+		$data = array();
 		if (is_int($acc->id)) {
 			$path .= "/{$acc->id}";
-			if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
-			$_SESSION[$path]["success"] = array("Käyttäjä luotu onnistuneesti!");
+			$data["success"] = array("Käyttäjä luotu onnistuneesti!");
 		} else {
 			$path .= "/add";
-			if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
-			$_SESSION[$path]["errors"] = $err;
+			$data["errors"] = $err;
 			$attr["password"] = $_POST["password"];
-			$_SESSION[$path]["attr"] = $attr;
+			$data["attr"] = $attr;
 		}
-		echo Redirect::view($path)->render();
+		echo Redirect::view($path, $data)->render();
 	}
 
 	public static function editview($id) {
@@ -94,30 +93,29 @@ class AccountController extends Controller {
 		}
 
 		$path = "/accounts";
+		$data = array();
 		if (count($err) === 0) {
 			$path .= "/{$acc->id}";
-			if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
-			$_SESSION[$path]["success"] = array("Muokkaus onnistui!");
+			$data["success"] = array("Muokkaus onnistui!");
 		} else {
 			$path .= "/edit";
-			if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
-			$_SESSION[$path]["errors"] = $err;
+			$data["errors"] = $err;
 			$attr["password"] = $_POST["password"];
-			$_SESSION[$path]["attr"] = $attr;
+			$data["attr"] = $attr;
 		}
-		echo Redirect::view($path)->render();
+		echo Redirect::view($path, $data)->render();
 	}
 
 	public static function delete($id) {
 		$id = intval($id);
 		$path = "/accounts";
-		if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
 		$res = Account::delete($id);
+		$data = array();
 		if ($res) {
-			$_SESSION[$path]["success"] = array("Käyttäjä poistettiin onnistuneesti!");
+			$data["success"] = array("Käyttäjä poistettiin onnistuneesti!");
 		} else {
-			$_SESSION[$path]["errors"] = array("Käyttäjää ei voitu poistaa!");
+			$data["errors"] = array("Käyttäjää ei voitu poistaa!");
 		}
-		echo Redirect::view($path)->render();
+		echo Redirect::view($path, $data)->render();
 	}
 }
