@@ -38,17 +38,25 @@ class AccountController extends Controller {
 		$attr["admin"] = (isset($_POST["admin"]) && $_POST["admin"]) ? true : false;
 
 		$acc = new Account($attr);
-		Account::save($acc);
+		$err = $acc->errors();
+
+		if (count($err) === 0) {
+			Account::save($acc);
+		}
 
 		$path = "/accounts";
 		if (is_int($acc->id)) {
 			$path .= "/{$acc->id}";
+			if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
+			$_SESSION[$path]["success"] = array("Käyttäjä luotu onnistuneesti!");
+		} else {
+			$path .= "/add";
+			if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
+			$_SESSION[$path]["errors"] = $err;
+			$attr["password"] = $_POST["password"];
+			$_SESSION[$path]["attr"] = $attr;
 		}
-		$bv = new View("base", array(
-			"title" => "Uudelleenohjaus",
-			"content" => Redirect::html($path),
-		));
-		echo $bv->render();
+		echo Redirect::view($path)->render();
 	}
 
 	public static function editview($id) {
@@ -74,21 +82,29 @@ class AccountController extends Controller {
 		$acc->nick = $_POST["nick"];
 		if (isset($_POST["password"]) && $_POST["password"] !== "") {
 			$acc->password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+		} else {
+			$_POST["password"] = "";
 		}
 		$acc->admin = (isset($_POST["admin"]) && $_POST["admin"]) ? true : false;
 
-		Account::update($acc);
+		$err = $acc->errors();
+
+		if (count($err) === 0) {
+			Account::update($acc);
+		}
 
 		$path = "/accounts";
-		if (is_int($acc->id)) {
+		if (count($err) === 0) {
 			$path .= "/{$acc->id}";
+			if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
+			$_SESSION[$path]["success"] = array("Muokkaus onnistui!");
 		} else {
 			$path .= "/edit";
+			if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
+			$_SESSION[$path]["errors"] = $err;
+			$attr["password"] = $_POST["password"];
+			$_SESSION[$path]["attr"] = $attr;
 		}
-		$bv = new View("base", array(
-			"title" => "Uudelleenohjaus",
-			"content" => Redirect::html($path),
-		));
-		echo $bv->render();
+		echo Redirect::view($path)->render();
 	}
 }

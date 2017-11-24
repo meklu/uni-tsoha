@@ -18,4 +18,12 @@ class Redirect {
 		self::soft($path);
 		echo "<a href=\"" . self::calc($path) . "\">Paina tästä</a>, mikäli selaimesi ei uudelleenohjaa sinua.\n";
 	}
+
+	public static function view($path) {
+		$bv = new View("base", array(
+			"title" => "Uudelleenohjaus",
+			"content" => static::html($path),
+		));
+		return $bv;
+	}
 }

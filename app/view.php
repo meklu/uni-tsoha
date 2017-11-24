@@ -63,6 +63,28 @@ class View {
 		}
 	}
 
+	/** Palauttaa syötetyn mallin attribuutin joko ensisijaisesti istunnosta tai sitten oliosta */
+	function pA($attr, $obj = null) {
+		if (isset($_SESSION[REQ_URL]["attr"][$attr]) && $_SESSION[REQ_URL]["attr"][$attr] !== "") {
+			return $_SESSION[REQ_URL]["attr"][$attr];
+		}
+		if ($obj && $obj->{$attr} !== "" && $obj->{$attr} !== null) {
+			return $obj->{$attr};
+		}
+		return "";
+	}
+
+	/** Palauttaa syötetyn mallin totuusarvoisen attribuutin joko ensisijaisesti istunnosta tai sitten oliosta */
+	function pAB($attr, $obj = null) {
+		if (isset($_SESSION[REQ_URL]["attr"][$attr])) {
+			return boolval($_SESSION[REQ_URL]["attr"][$attr]);
+		}
+		if ($obj) {
+			return boolval($obj->{$attr});
+		}
+		return false;
+	}
+
 	/** Palauttaa merkkijonon! */
 	function render() {
 		foreach ($this->params as $k => $v) {

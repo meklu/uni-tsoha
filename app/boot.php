@@ -33,4 +33,7 @@ $router = new Router();
 
 require __DIR__ . "/../config/routes.php";
 
+session_name("muistilista");
+session_start();
+
 $router->run();

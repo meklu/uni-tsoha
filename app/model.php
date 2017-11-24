@@ -13,13 +13,25 @@ class Model {
 		$ret = array();
 
 		foreach ($this->validators as $v) {
-			$r = $v();
-			if ($r !== true) {
-				$ret[] = $r;
-			}
+			$r = $this->{$v}();
+			$ret = array_merge($ret, array_values($r));
 		}
 
 		return $ret;
+	}
+
+	function validate_strlen_min($str, $len) {
+		if (strlen($str) < $len) {
+			return false;
+		}
+		return true;
+	}
+
+	function validate_strlen_max($str, $len) {
+		if (strlen($str) > $len) {
+			return false;
+		}
+		return true;
 	}
 
 	protected static function _all($orderBy = "id") {
