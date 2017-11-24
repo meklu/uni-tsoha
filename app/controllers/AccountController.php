@@ -2,7 +2,12 @@
 
 class AccountController extends Controller {
 	public static function index() {
-		$data = Account::all();
+		$user = static::check_logged_in();
+		if ($user->admin) {
+			$data = Account::all();
+		} else {
+			$data = array($user);
+		}
 		$bv = new View("base", array(
 			"content" => new View("accounts/list", array(
 				"accounts" => $data,
@@ -12,7 +17,13 @@ class AccountController extends Controller {
 	}
 
 	public static function show($id) {
-		$a = Account::find($id);
+		$user = static::check_logged_in();
+		$a = null;
+		if ($user->id . "" === $id . "") {
+			$a = $user;
+		} else if ($user->admin) {
+			$a = Account::find($id);
+		}
 		if (!$a) {
 			http_response_code(404);
 		}
@@ -25,6 +36,13 @@ class AccountController extends Controller {
 	}
 
 	public static function addview() {
+		$user = static::check_logged_in();
+		if (!$user->admin) {
+			http_response_code(403);
+			ErrorController::error("Toiminto ei ole sallittu!");
+			return;
+		}
+
 		$bv = new View("base", array(
 			"content" => new View("accounts/add"),
 		));
@@ -32,6 +50,13 @@ class AccountController extends Controller {
 	}
 
 	public static function add() {
+		$user = static::check_logged_in();
+		if (!$user->admin) {
+			http_response_code(403);
+			ErrorController::error("Toiminto ei ole sallittu!");
+			return;
+		}
+
 		$attr = array();
 		$attr["nick"] = $_POST["nick"];
 		$attr["password"] = password_hash($_POST["password"], PASSWORD_DEFAULT);
@@ -71,7 +96,17 @@ class AccountController extends Controller {
 	}
 
 	public static function editview($id) {
-		$a = Account::find($id);
+		$user = static::check_logged_in();
+		$a = null;
+		if ($user->id . "" === $id . "") {
+			$a = $user;
+		} else if ($user->admin) {
+			$a = Account::find($id);
+		} else {
+			http_response_code(403);
+			ErrorController::error("Toiminto ei ole sallittu!");
+			return;
+		}
 		if (!$a) {
 			http_response_code(404);
 		}
@@ -84,7 +119,18 @@ class AccountController extends Controller {
 	}
 
 	public static function edit($id) {
-		$acc = Account::find($id);
+		$user = static::check_logged_in();
+		$acc = null;
+		if ($user->id . "" === $id . "") {
+			$acc = $user;
+		} else if ($user->admin) {
+			$acc = Account::find($id);
+		} else {
+			http_response_code(403);
+			ErrorController::error("Toiminto ei ole sallittu!");
+			return;
+		}
+
 		if (!$acc) {
 			http_response_code(404);
 		}
@@ -96,7 +142,9 @@ class AccountController extends Controller {
 		} else {
 			$_POST["password"] = "";
 		}
-		$acc->admin = (isset($_POST["admin"]) && $_POST["admin"]) ? true : false;
+		if ($user->admin) {
+			$acc->admin = (isset($_POST["admin"]) && $_POST["admin"]) ? true : false;
+		}
 
 		$err = $acc->errors();
 
@@ -119,6 +167,18 @@ class AccountController extends Controller {
 	}
 
 	public static function delete($id) {
+		$user = static::check_logged_in();
+		$a = null;
+		if ($user->id . "" === $id . "") {
+			$a = $user;
+		} else if ($user->admin) {
+			$a = Account::find($id);
+		} else {
+			http_response_code(403);
+			ErrorController::error("Toiminto ei ole sallittu!");
+			return;
+		}
+
 		$path = "/accounts";
 		$res = Account::delete($id);
 		$data = array();
