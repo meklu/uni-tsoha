@@ -24,6 +24,19 @@ $router->get("/accounts", function () {
 	AccountController::index();
 });
 
+/* Virheet */
+$router->error(403, function ($e) {
+	ErrorController::error($e->getMessage());
+});
+
+$router->error(404, function ($e) {
+	ErrorController::error($e->getMessage());
+});
+
+$router->error(500, function ($e) {
+	ErrorController::error($e->getMessage());
+});
+
 /* Testijuttu */
 
 $router->get("/psufh", function () {

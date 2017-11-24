@@ -21,20 +21,32 @@ class Router {
 	 *    ...
 	 * ) */
 	protected $r;
+	/* array(
+	 *    403 => <func>,
+	 *    404 => <func>,
+	 *    500 => <func>,
+	 *    ...
+	 * ) */
+	protected $err;
 
 	function __construct() {
 		$this->r = array();
+		$this->err = array();
 	}
 
 	function routes() {
 		return $this->r;
 	}
 
+	function errors() {
+		return $this->err;
+	}
+
 	function pathparts($path) {
 		return explode("/", ltrim($path, "/"));
 	}
 
-	/* Reitin lisäys */
+	/** Reitin lisäys */
 	protected function add($reqtype, $path, $func) {
 		$ok = array("get", "post", "delete", "put");
 		$lkup = array_flip($ok);
@@ -86,14 +98,20 @@ class Router {
 		$this->add("put", $path, $func);
 	}
 
-	/** Reitin seuranta */
-	function run() {
+	/** Virhereitin lisäys
+	 * Koskee vain heitettyjä ongelmia */
+	function error($code, $func) {
+		$this->err[$code] = $func;
+	}
+
+	protected function _run() {
 		$checkm = strtolower(REQ_METHOD);
 		$pos = $this->r[$checkm];
 		$attr = array();
 		foreach (APP_ROUTE as $p) {
 			if (!isset($pos["children"][$p])) {
 				if (!isset($pos["children"][':'])) {
+					http_response_code(404);
 					throw new Exception("Path not found in route");
 				}
 				$attr[$pos["children"][':']["key"]] = $p;
@@ -104,7 +122,24 @@ class Router {
 		if (is_callable($pos["f"])) {
 			$pos["f"]($attr);
 		} else {
+			http_response_code(404);
 			throw new Exception("Resolved route has no callable!");
+		}
+	}
+
+	/** Reitin seuranta */
+	function run() {
+		try {
+			$this->_run();
+		} catch (Exception $e) {
+			$errno = http_response_code();
+			if ($errno === 200) {
+				$errno = 500;
+				http_response_code($errno);
+			}
+			if (isset($this->err[$errno]) && is_callable($this->err[$errno])) {
+				$this->err[$errno]($e);
+			}
 		}
 	}
 }
