@@ -5,7 +5,7 @@ $this->exportParam("title", "Luokitukset");
 <table>
 	<tr>
 		<th>Nimi</th>
-		<th><a href="<?php echo BASE_DIR; ?>/categories/add">+</a></th>
+		<th><a href="<?php echo BASE_DIR; ?>/mock/categories/add">+</a></th>
 	</tr>
 	<tr>
 		<td>Ostoslista</td>

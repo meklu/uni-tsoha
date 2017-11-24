@@ -2,7 +2,7 @@
 $this->exportParam("title", "Askareet");
 ?>
 <h1>Muistilista</h1>
-<p><a href="<?php echo BASE_DIR; ?>/tasks/add">+ Luo askare</a></p>
+<p><a href="<?php echo BASE_DIR; ?>/mock/tasks/add">+ Luo askare</a></p>
 <table>
 	<tr>
 		<th>Askareet</th>

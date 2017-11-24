@@ -6,7 +6,7 @@ $this->exportParam("title", "Käyttäjät");
 	<tr>
 		<th>Nimimerkki</th>
 		<th>Ylläpitäjä?</th>
-		<th><a href="<?php echo BASE_DIR; ?>/users/add">+</a></th>
+		<th><a href="<?php echo BASE_DIR; ?>/mock/users/add">+</a></th>
 	</tr>
 	<tr>
 		<td>testi</td>

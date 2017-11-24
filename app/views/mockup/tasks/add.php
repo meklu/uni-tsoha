@@ -2,8 +2,8 @@
 $this->exportParam("title", "Luo askare");
 ?>
 <h1>Luo askare</h1>
-<p><a href="<?php echo BASE_DIR; ?>/tasks">← Takaisin</a></p>
-<form action="<?php echo BASE_DIR; ?>/tasks/add" method="post">
+<p><a href="<?php echo BASE_DIR; ?>/mock/tasks">← Takaisin</a></p>
+<form action="<?php echo BASE_DIR; ?>/mock/tasks/add" method="post">
 	<p><label><p>Askare</p><input name="name" type="text" /></label></p>
 	<p>
 		<label>

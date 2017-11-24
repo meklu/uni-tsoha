@@ -6,7 +6,7 @@ $this->exportParam("title", "Tärkeysasteet");
 	<tr>
 		<th>Nimi</th>
 		<th>Tärkeysaste</th>
-		<th><a href="<?php echo BASE_DIR; ?>/priorities/add">+</a></th>
+		<th><a href="<?php echo BASE_DIR; ?>/mock/priorities/add">+</a></th>
 	</tr>
 	<tr>
 		<td>megatärkeä</td>
