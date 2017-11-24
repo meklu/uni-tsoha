@@ -20,6 +20,18 @@ $router->post("/accounts/:id/edit", function ($a) {
 	AccountController::edit(...array_values($a));
 });
 
+$router->put("/accounts/:id/edit", function ($a) {
+	AccountController::edit(...array_values($a));
+});
+
+$router->get("/accounts/:id/delete", function ($a) {
+	AccountController::delete(...array_values($a));
+});
+
+$router->delete("/accounts/:id/delete", function ($a) {
+	AccountController::delete(...array_values($a));
+});
+
 $router->get("/accounts", function () {
 	AccountController::index();
 });

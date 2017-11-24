@@ -49,4 +49,8 @@ class Account extends Model {
 			"admin" => PDO::PARAM_BOOL,
 		));
 	}
+
+	static function delete($id) {
+		return static::_delete($id);
+	}
 }

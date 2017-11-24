@@ -107,4 +107,17 @@ class AccountController extends Controller {
 		}
 		echo Redirect::view($path)->render();
 	}
+
+	public static function delete($id) {
+		$id = intval($id);
+		$path = "/accounts";
+		if (!isset($_SESSION[$path])) { $_SESSION[$path] = array(); }
+		$res = Account::delete($id);
+		if ($res) {
+			$_SESSION[$path]["success"] = array("Käyttäjä poistettiin onnistuneesti!");
+		} else {
+			$_SESSION[$path]["errors"] = array("Käyttäjää ei voitu poistaa!");
+		}
+		echo Redirect::view($path)->render();
+	}
 }

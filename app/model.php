@@ -120,4 +120,23 @@ class Model {
 
 		return $object;
 	}
+
+	protected static function _delete($id) {
+		if (!is_int($id)) {
+			return false;
+		}
+
+		$db = Database::conn();
+
+		$q = $db->prepare("DELETE FROM " . static::class . " WHERE id = :id RETURNING 1 AS one");
+		$q->bindValue(":id", $id, PDO::PARAM_INT);
+		$q->execute();
+
+		$row = $q->fetch(PDO::FETCH_ASSOC);
+		if (!$row) {
+			return false;
+		}
+
+		return true;
+	}
 }
