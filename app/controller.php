@@ -19,5 +19,6 @@ class Controller {
 		}
 		$_SESSION["afterlogin"] = REQ_URL;
 		echo Redirect::view("/login")->render();
+		exit();
 	}
 }
