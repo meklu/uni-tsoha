@@ -49,6 +49,22 @@ class Model {
 		return $ret;
 	}
 
+	protected static function _allByField($field, $value, $type, $orderBy = "id") {
+		$db = Database::conn();
+		$q = $db->prepare("SELECT * FROM " . static::class . " WHERE {$field} = :{$field} ORDER BY " . $orderBy);
+		$q->bindValue(":{$field}", $value, $type);
+		$q->execute();
+
+		$rows = $q->fetchAll(PDO::FETCH_ASSOC);
+		$ret = array();
+
+		foreach ($rows as $row) {
+			$ret[] = new static($row);
+		}
+
+		return $ret;
+	}
+
 	protected static function _find($id) {
 		return static::_findByField("id", $id, PDO::PARAM_INT);
 	}
@@ -130,6 +146,22 @@ class Model {
 
 		$q = $db->prepare("DELETE FROM " . static::class . " WHERE id = :id RETURNING 1 AS one");
 		$q->bindValue(":id", $id, PDO::PARAM_INT);
+		$q->execute();
+
+		$row = $q->fetch(PDO::FETCH_ASSOC);
+		if (!$row) {
+			return false;
+		}
+
+		return true;
+	}
+
+	protected static function _deleteWhere($id, $field, $value, $type) {
+		$db = Database::conn();
+
+		$q = $db->prepare("DELETE FROM " . static::class . " WHERE id = :id AND {$field} = :{$field} RETURNING 1 AS one");
+		$q->bindValue(":id", $id, PDO::PARAM_INT);
+		$q->bindValue(":{$field}", $value, $type);
 		$q->execute();
 
 		$row = $q->fetch(PDO::FETCH_ASSOC);

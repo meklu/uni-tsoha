@@ -152,10 +152,9 @@ class AccountController extends Controller {
 			Account::update($acc);
 		}
 
-		$path = "/accounts";
+		$path = "/accounts/{$acc->id}";
 		$data = array();
 		if (count($err) === 0) {
-			$path .= "/{$acc->id}";
 			$data["success"] = array("Muokkaus onnistui!");
 		} else {
 			$path .= "/edit";

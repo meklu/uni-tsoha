@@ -9,5 +9,6 @@ class ErrorController extends Controller {
 			)),
 		));
 		echo $bv->render();
+		exit();
 	}
 }

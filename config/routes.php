@@ -20,6 +20,7 @@ $router->post("/login", function () {
 
 /* Tietueet */
 
+/* Käyttäjät */
 $router->get("/accounts/:id", function ($a) {
 	# ...$foo ei toimi string-avaimilla :D
 	AccountController::show(...array_values($a));
@@ -55,6 +56,44 @@ $router->delete("/accounts/:id/delete", function ($a) {
 
 $router->get("/accounts", function () {
 	AccountController::index();
+});
+
+/* Tärkeysasteet */
+$router->get("/priorities/:id", function ($a) {
+	# ...$foo ei toimi string-avaimilla :D
+	PriorityController::show(...array_values($a));
+});
+
+$router->get("/priorities/add", function () {
+	PriorityController::addview();
+});
+
+$router->post("/priorities/add", function () {
+	PriorityController::add();
+});
+
+$router->get("/priorities/:id/edit", function ($a) {
+	PriorityController::editview(...array_values($a));
+});
+
+$router->post("/priorities/:id/edit", function ($a) {
+	PriorityController::edit(...array_values($a));
+});
+
+$router->put("/priorities/:id/edit", function ($a) {
+	PriorityController::edit(...array_values($a));
+});
+
+$router->get("/priorities/:id/delete", function ($a) {
+	PriorityController::delete(...array_values($a));
+});
+
+$router->delete("/priorities/:id/delete", function ($a) {
+	PriorityController::delete(...array_values($a));
+});
+
+$router->get("/priorities", function () {
+	PriorityController::index();
 });
 
 /* Virheet */
