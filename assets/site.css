@@ -66,7 +66,6 @@ tbody > tr:nth-of-type(even) {
 }
 
 #main-container > nav {
-	width: 100vw;
 	margin: 0 auto;
 	padding: 4pt;
 	word-spacing: 0;
@@ -105,4 +104,16 @@ tbody > tr:nth-of-type(even) {
 	background-color: #404040;
 	color: #ffffff;
 	box-shadow: inset 0pt 0pt 5pt #cdcdcd;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+#main-container > nav::after {
+	clear: both;
 }

@@ -21,7 +21,7 @@ $user = Controller::get_current_user();
 						<a href="<?= BASE_DIR ?>/accounts">Käyttäjät</a>
 					<?php } ?>
 					<a href="<?= BASE_DIR ?>/accounts/<?= $user->id ?>">Oma käyttäjätili</a>
-					<form action="<?= BASE_DIR ?>/logout" method="post">
+					<form class="float-right" action="<?= BASE_DIR ?>/logout" method="post">
 						<input type="submit" value="Kirjaudu ulos" />
 					</form>
 				</nav>
