@@ -2,6 +2,8 @@
 # Parametreina
 #	title : string
 #	content : html
+
+$user = Controller::get_current_user();
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,9 +15,16 @@
 	<body>
 		<div id="main-container">
 			<?php if (isset($_SESSION["userid"])) { ?>
-				<form action="<?= BASE_DIR . "/logout" ?>" method="post">
-					<input type="submit" value="Kirjaudu ulos" />
-				</form>
+				<nav>
+					<a href="<?= BASE_DIR ?>/priorities">Tärkeysasteet</a>
+					<?php if ($user->admin) { ?>
+						<a href="<?= BASE_DIR ?>/accounts">Käyttäjät</a>
+					<?php } ?>
+					<a href="<?= BASE_DIR ?>/accounts/<?= $user->id ?>">Oma käyttäjätili</a>
+					<form action="<?= BASE_DIR ?>/logout" method="post">
+						<input type="submit" value="Kirjaudu ulos" />
+					</form>
+				</nav>
 			<?php } ?>
 			<?php if (!isset($this->params["dirty"])) { ?>
 				<?php if (isset($_SESSION[REQ_URL]["errors"])) { ?>
