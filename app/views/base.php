@@ -12,6 +12,11 @@
 	</head>
 	<body>
 		<div id="main-container">
+			<?php if (isset($_SESSION["userid"])) { ?>
+				<form action="<?= BASE_DIR . "/logout" ?>" method="post">
+					<input type="submit" value="Kirjaudu ulos" />
+				</form>
+			<?php } ?>
 			<?php if (!isset($this->params["dirty"])) { ?>
 				<?php if (isset($_SESSION[REQ_URL]["errors"])) { ?>
 				<div class="status-msg error-block" id="errors">

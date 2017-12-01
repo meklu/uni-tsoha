@@ -18,6 +18,10 @@ $router->post("/login", function () {
 	LoginController::login();
 });
 
+$router->post("/logout", function () {
+	LoginController::logout();
+});
+
 /* Tietueet */
 
 /* Käyttäjät */

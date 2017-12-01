@@ -28,4 +28,12 @@ class LoginController extends Controller {
 		}
 		echo Redirect::view($path, $data)->render();
 	}
+
+	public static function logout() {
+		$_SESSION = array();
+
+		$data = array();
+		$data["success"] = array("Sinut on kirjattu ulos!");
+		echo Redirect::view("/login", $data)->render();
+	}
 }
