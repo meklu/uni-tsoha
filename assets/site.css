@@ -85,18 +85,24 @@ tbody > tr:nth-of-type(even) {
 	margin: 0;
 	padding: 0.1em 0.3em;
 	cursor: pointer;
+	background-color: #ffffff;
 	color: #400000;
-	background: #ffffff;
+	box-shadow: inset 0pt 0pt 5pt #888888;
 	border-radius: 0.2em;
 	border: 1px solid black;
 	text-decoration: none;
 	font-size: 15pt;
 	font-weight: normal;
+	transition-property: background-color, color, box-shadow;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
 }
 
 #main-container > nav > a:hover,
 #main-container > nav > form > input[type="button"]:hover,
 #main-container > nav > form > input[type="submit"]:hover,
 #main-container > nav > form > button:hover {
+	background-color: #404040;
+	color: #ffffff;
 	box-shadow: inset 0pt 0pt 5pt #cdcdcd;
 }
