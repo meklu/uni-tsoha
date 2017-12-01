@@ -15,14 +15,14 @@ INSERT INTO Priority VALUES (
 INSERT INTO Priority VALUES (
 	2,
 	1,
-	100,
+	-100,
 	'roskis'
 );
 
 INSERT INTO Priority VALUES (
 	3,
 	1,
-	100,
+	0,
 	'aika perus'
 );
 
