@@ -8,7 +8,22 @@ class Priority extends Model {
 
 	function __construct($attr) {
 		parent::__construct($attr);
-		$this->validators = array();
+		$this->validators = array(
+			"validate_name",
+		);
+	}
+
+	function validate_name() {
+		$err = array();
+		$min = 3;
+		if (!$this->validate_strlen_min($this->nick, $min)) {
+			$err[] = "Nimen tulee olla vähintään {$min} merkin pituinen!";
+		}
+		$max = 64;
+		if (!$this->validate_strlen_max($this->nick, $max)) {
+			$err[] = "Nimi saa olla enintään {$max} merkin pituinen!";
+		}
+		return $err;
 	}
 
 	static function all() {
