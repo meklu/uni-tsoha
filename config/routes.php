@@ -6,7 +6,7 @@ $router->get("/", function () {
 	HejsanController::html(
 		"Placeholder",
 		"<h1>Moi!</h1>\n" .
-		"<a href=\"" . BASE_DIR . "/accounts\">Käyttäjälistaukseen</a>"
+		""
 	);
 });
 
