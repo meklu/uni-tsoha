@@ -41,3 +41,15 @@ tätä pääsee testaamaan esimerkiksi seuraavalla tunnusparilla:
     testi:testi
 
 * [Linkki kirjautumissivulle](https://melker.users.cs.helsinki.fi/uni-tsoha/login)
+
+## Viikko 5
+
+Toteutettu tärkeysastemalli (Priority) ja siihen liittyvät muut palat.
+Kirjautumistarkistuksiin otettiin varaslähtö jo viikko sitten ja ne on
+nyt toteutettu myös uudellekin kontrollerille.
+
+Tämän lisäksi sovellukseen on lisätty navigaatiopalkki sivun ylälaitaan. Uusi
+navigaatiopalkki sisältää linkkejä toiminnallisuuteen, minkä lisäksi siitä
+löytyy myös uloskirjautumisnappi oikeasta reunasta.
+
+* [Linkki tärkeysastelistaan](https://melker.users.cs.helsinki.fi/uni-tsoha/priorities)
