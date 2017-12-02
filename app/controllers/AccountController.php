@@ -147,6 +147,7 @@ class AccountController extends Controller {
 		}
 
 		$err = $acc->errors();
+		$err = array_merge($err, Account::_validate_plaintext_password($_POST["password"]));
 
 		if (count($err) === 0) {
 			Account::update($acc);
