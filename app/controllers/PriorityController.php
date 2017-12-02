@@ -111,7 +111,6 @@ class PriorityController extends Controller {
 		} else {
 			$path .= "/edit";
 			$data["errors"] = $err;
-			$attr["password"] = $_POST["password"];
 			$data["attr"] = $attr;
 		}
 		echo Redirect::view($path, $data)->render();

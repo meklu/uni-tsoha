@@ -16,11 +16,11 @@ class Priority extends Model {
 	function validate_name() {
 		$err = array();
 		$min = 3;
-		if (!$this->validate_strlen_min($this->nick, $min)) {
+		if (!$this->validate_strlen_min($this->name, $min)) {
 			$err[] = "Nimen tulee olla vähintään {$min} merkin pituinen!";
 		}
 		$max = 64;
-		if (!$this->validate_strlen_max($this->nick, $max)) {
+		if (!$this->validate_strlen_max($this->name, $max)) {
 			$err[] = "Nimi saa olla enintään {$max} merkin pituinen!";
 		}
 		return $err;
