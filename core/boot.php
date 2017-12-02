@@ -22,7 +22,7 @@ spl_autoload_register(function ($class) {
 		"models",
 	);
 	foreach ($dirs as $d) {
-		$f = __DIR__ . "/$d/$class.php";
+		$f = __DIR__ . "/../app/$d/$class.php";
 		if (file_exists($f)) {
 			require $f;
 		}
@@ -31,9 +31,10 @@ spl_autoload_register(function ($class) {
 
 $router = new Router();
 
+require __DIR__ . "/../config/config.php";
 require __DIR__ . "/../config/routes.php";
 
-session_name("muistilista");
+session_name(strtolower(APP_NAME));
 session_start();
 
 $router->run();

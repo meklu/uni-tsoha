@@ -8,7 +8,7 @@ class View {
 	protected $alwaysRender;
 
 	function __construct($path, $params = array(), $alwaysRender = false) {
-		$this->path = __DIR__ . "/views/" . $path . ".php";
+		$this->path = __DIR__ . "/../app/views/" . $path . ".php";
 		$this->params = $params;
 		$this->exportParams = array();
 		$this->renderCache = array();
