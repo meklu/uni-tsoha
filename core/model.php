@@ -177,14 +177,9 @@ class Model {
 		$db = Database::conn();
 
 		foreach ((array) $reltables as $reltable) {
-			$q = $db->prepare("UPDATE $reltable SET {$relfield} = null WHERE {$relfield} = :{$relfield} RETURNING 1 AS one");
+			$q = $db->prepare("UPDATE $reltable SET {$relfield} = null WHERE {$relfield} = :{$relfield}");
 			$q->bindValue(":{$relfield}", $id, PDO::PARAM_INT);
 			$q->execute();
-
-			$row = $q->fetch(PDO::FETCH_ASSOC);
-			if (!$row) {
-				return false;
-			}
 		}
 
 		return true;
