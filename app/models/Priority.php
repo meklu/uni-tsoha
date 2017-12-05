@@ -55,7 +55,6 @@ class Priority extends Model {
 	}
 
 	static function delete($id) {
-		return static::_delete($id);
 		return static::_deleteClearingRelations($id, "Task");
 	}
 

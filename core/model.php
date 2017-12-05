@@ -208,4 +208,17 @@ class Model {
 		$r = $r && $db->commit();
 		return $r;
 	}
+
+	protected static function _deleteRelations($id, $reltables) {
+		$relfield = strtolower(static::class) . "_id";
+		$db = Database::conn();
+
+		foreach ((array) $reltables as $reltable) {
+			$q = $db->prepare("DELETE FROM $reltable WHERE {$relfield} = :{$relfield}");
+			$q->bindValue(":{$relfield}", $id, PDO::PARAM_INT);
+			$q->execute();
+		}
+
+		return true;
+	}
 }
