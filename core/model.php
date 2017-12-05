@@ -172,17 +172,19 @@ class Model {
 		return true;
 	}
 
-	protected static function _clearRelation($id, $reltable) {
+	protected static function _clearRelations($id, $reltables) {
 		$relfield = strtolower(static::class) . "_id";
 		$db = Database::conn();
 
-		$q = $db->prepare("UPDATE $reltable SET {$relfield} = null WHERE {$relfield} = :{$relfield} RETURNING 1 AS one");
-		$q->bindValue(":{$relfield}", $id, PDO::PARAM_INT);
-		$q->execute();
+		foreach ((array) $reltables as $reltable) {
+			$q = $db->prepare("UPDATE $reltable SET {$relfield} = null WHERE {$relfield} = :{$relfield} RETURNING 1 AS one");
+			$q->bindValue(":{$relfield}", $id, PDO::PARAM_INT);
+			$q->execute();
 
-		$row = $q->fetch(PDO::FETCH_ASSOC);
-		if (!$row) {
-			return false;
+			$row = $q->fetch(PDO::FETCH_ASSOC);
+			if (!$row) {
+				return false;
+			}
 		}
 
 		return true;
@@ -194,13 +196,9 @@ class Model {
 			return false;
 		}
 		$r = true;
-		foreach ((array) $reltables as $reltable) {
-			$r = $r && static::_clearRelation($id, $reltable);
-		}
+		$r = $r && static::_clearRelations($id, $reltables);
 		$r = $r && static::_delete($id);
-		if (!$db->commit()) {
-			return false;
-		}
+		$r = $r && $db->commit();
 		return $r;
 	}
 
@@ -210,13 +208,9 @@ class Model {
 			return false;
 		}
 		$r = true;
-		foreach ((array) $reltables as $reltable) {
-			$r = $r && static::_clearRelation($id, $reltable);
-		}
+		$r = $r && static::_clearRelations($id, $reltables);
 		$r = $r && static::_deleteWhere($id, $field, $value, $type);
-		if (!$db->commit()) {
-			return false;
-		}
+		$r = $r && $db->commit();
 		return $r;
 	}
 }
