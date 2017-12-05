@@ -7,25 +7,25 @@ CREATE TABLE Account (
 
 CREATE TABLE Priority (
 	id SERIAL PRIMARY KEY,
-	account_id INTEGER REFERENCES Account(id),
+	account_id INTEGER REFERENCES Account(id) ON DELETE CASCADE,
 	priority INTEGER, -- isompi tärkeämpi, "baseline" 0
 	name VARCHAR(64)
 );
 
 CREATE TABLE Task (
 	id SERIAL PRIMARY KEY,
-	account_id INTEGER REFERENCES Account(id),
-	priority_id INTEGER REFERENCES Priority(id),
+	account_id INTEGER REFERENCES Account(id) ON DELETE CASCADE,
+	priority_id INTEGER REFERENCES Priority(id) ON DELETE SET NULL,
 	task VARCHAR(255)
 );
 
 CREATE TABLE Category (
 	id SERIAL PRIMARY KEY,
-	account_id INTEGER REFERENCES Account(id),
+	account_id INTEGER REFERENCES Account(id) ON DELETE CASCADE,
 	name VARCHAR(64)
 );
 
 CREATE TABLE TaskCategory (
-	task_id INTEGER REFERENCES Task(id),
-	category_id INTEGER REFERENCES Category(id)
+	task_id INTEGER REFERENCES Task(id) ON DELETE CASCADE,
+	category_id INTEGER REFERENCES Category(id) ON DELETE CASCADE
 );
