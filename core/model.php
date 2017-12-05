@@ -171,4 +171,52 @@ class Model {
 
 		return true;
 	}
+
+	protected static function _clearRelation($id, $reltable) {
+		$relfield = strtolower(static::class) . "_id";
+		$db = Database::conn();
+
+		$q = $db->prepare("UPDATE $reltable SET {$relfield} = null WHERE {$relfield} = :{$relfield} RETURNING 1 AS one");
+		$q->bindValue(":{$relfield}", $id, PDO::PARAM_INT);
+		$q->execute();
+
+		$row = $q->fetch(PDO::FETCH_ASSOC);
+		if (!$row) {
+			return false;
+		}
+
+		return true;
+	}
+
+	protected static function _deleteClearingRelations($id, $reltables) {
+		$db = Database::conn();
+		if (!$db->beginTransaction()) {
+			return false;
+		}
+		$r = true;
+		foreach ((array) $reltables as $reltable) {
+			$r = $r && static::_clearRelation($id, $reltable);
+		}
+		$r = $r && static::_delete($id);
+		if (!$db->commit()) {
+			return false;
+		}
+		return $r;
+	}
+
+	protected static function _deleteClearingRelationsWhere($id, $reltables, $field, $value, $type) {
+		$db = Database::conn();
+		if (!$db->beginTransaction()) {
+			return false;
+		}
+		$r = true;
+		foreach ((array) $reltables as $reltable) {
+			$r = $r && static::_clearRelation($id, $reltable);
+		}
+		$r = $r && static::_deleteWhere($id, $field, $value, $type);
+		if (!$db->commit()) {
+			return false;
+		}
+		return $r;
+	}
 }

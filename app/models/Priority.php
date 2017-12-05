@@ -56,9 +56,10 @@ class Priority extends Model {
 
 	static function delete($id) {
 		return static::_delete($id);
+		return static::_deleteClearingRelations($id, "Task");
 	}
 
 	static function deleteForAccount($id, $account_id) {
-		return static::_deleteWhere($id, "account_id", $account_id, PDO::PARAM_INT);
+		return static::_deleteClearingRelationsWhere($id, "Task", "account_id", $account_id, PDO::PARAM_INT);
 	}
 }
