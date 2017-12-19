@@ -17,6 +17,7 @@ $user = Controller::get_current_user();
 			<?php if (isset($_SESSION["userid"])) { ?>
 				<nav>
 					<a href="<?= BASE_DIR ?>/priorities">Tärkeysasteet</a>
+					<a href="<?= BASE_DIR ?>/categories">Luokitukset</a>
 					<?php if ($user->admin) { ?>
 						<a href="<?= BASE_DIR ?>/accounts">Käyttäjät</a>
 					<?php } ?>

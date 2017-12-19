@@ -100,6 +100,43 @@ $router->get("/priorities", function () {
 	PriorityController::index();
 });
 
+/* Luokitukset */
+$router->get("/categories/:id", function ($a) {
+	CategoryController::show(...array_values($a));
+});
+
+$router->get("/categories/add", function () {
+	CategoryController::addview();
+});
+
+$router->post("/categories/add", function () {
+	CategoryController::add();
+});
+
+$router->get("/categories/:id/edit", function ($a) {
+	CategoryController::editview(...array_values($a));
+});
+
+$router->post("/categories/:id/edit", function ($a) {
+	CategoryController::edit(...array_values($a));
+});
+
+$router->put("/categories/:id/edit", function ($a) {
+	CategoryController::edit(...array_values($a));
+});
+
+$router->get("/categories/:id/delete", function ($a) {
+	CategoryController::delete(...array_values($a));
+});
+
+$router->delete("/categories/:id/delete", function ($a) {
+	CategoryController::delete(...array_values($a));
+});
+
+$router->get("/categories", function () {
+	CategoryController::index();
+});
+
 /* Virheet */
 $router->error(403, function ($e) {
 	ErrorController::error($e->getMessage());
