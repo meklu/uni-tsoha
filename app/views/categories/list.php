@@ -1,7 +1,7 @@
 <?php
 $this->exportParam("title", "Luokitukset");
 ?>
-<h1>Tärkeysasteet</h1>
+<h1><?= htmlspecialchars($this->exportParams["title"]) ?></h1>
 <table>
 	<tr>
 		<th>Nimi</th>
