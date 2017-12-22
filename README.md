@@ -1,5 +1,7 @@
 # Tietokantasovelluksen harjoitustyö
 
+# EI VALMIS! Tule joulupäivänä takaisin!
+
 * [Linkki sovellukseen](https://melker.users.cs.helsinki.fi/uni-tsoha/)
 * [Linkki dokumentaatioon](https://github.com/meklu/uni-tsoha/blob/master/doc/dokumentaatio.pdf)
 
