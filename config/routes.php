@@ -137,6 +137,44 @@ $router->get("/categories", function () {
 	CategoryController::index();
 });
 
+/* Askareet */
+$router->get("/tasks/:id", function ($a) {
+	TaskController::show(...array_values($a));
+});
+
+$router->get("/tasks/add", function () {
+	TaskController::addview();
+});
+
+$router->post("/tasks/add", function () {
+	TaskController::add();
+});
+
+$router->get("/tasks/:id/edit", function ($a) {
+	TaskController::editview(...array_values($a));
+});
+
+$router->post("/tasks/:id/edit", function ($a) {
+	TaskController::edit(...array_values($a));
+});
+
+$router->put("/tasks/:id/edit", function ($a) {
+	TaskController::edit(...array_values($a));
+});
+
+$router->get("/tasks/:id/delete", function ($a) {
+	TaskController::delete(...array_values($a));
+});
+
+$router->delete("/tasks/:id/delete", function ($a) {
+	TaskController::delete(...array_values($a));
+});
+
+$router->get("/tasks", function () {
+	TaskController::index();
+});
+
+
 /* Virheet */
 $router->error(403, function ($e) {
 	ErrorController::error($e->getMessage());

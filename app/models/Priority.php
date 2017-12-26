@@ -27,11 +27,11 @@ class Priority extends Model {
 	}
 
 	static function all() {
-		return static::_all();
+		return static::_all("priority DESC");
 	}
 
 	static function allForAccount($acc_id) {
-		return static::_allByField("account_id", $acc_id, PDO::PARAM_INT);
+		return static::_allByField("account_id", $acc_id, PDO::PARAM_INT, "priority DESC");
 	}
 
 	static function find($id) {

@@ -26,11 +26,11 @@ class Category extends Model {
 	}
 
 	static function all() {
-		return static::_all();
+		return static::_all("name ASC");
 	}
 
 	static function allForAccount($acc_id) {
-		return static::_allByField("account_id", $acc_id, PDO::PARAM_INT);
+		return static::_allByField("account_id", $acc_id, PDO::PARAM_INT, "name ASC");
 	}
 
 	static function find($id) {
