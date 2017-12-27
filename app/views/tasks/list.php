@@ -1,64 +1,53 @@
 <?php
 /* TODO: Ryhmittely, järjestys, jne. */
 $this->exportParam("title", "Askareet");
+$pT = function ($t) {
+?>
+	<tr>
+		<td><?= htmlspecialchars($t->task) ?></td>
+		<td><?= htmlspecialchars($this->params["priorities"][$t->priority_id]->name) ?></td>
+	</tr>
+<?php
+};
+$pC = function ($title) {
+?>
+<thead>
+	<tr>
+		<th><?= htmlspecialchars($title) ?></th>
+		<th></th>
+	</tr>
+</thead>
+<?php
+};
 ?>
 <h1>Muistilista</h1>
 <p><a href="<?= BASE_DIR ?>/tasks/add">+ Luo askare</a></p>
 <table>
-	<tr>
-		<th>Askareet</th>
-		<th><!-- kiireellisyys --></th>
-	</tr>
-	<tr>
-		<td>Juo maitoa</td>
-		<td>megatärkeä</td>
-	</tr>
-	<tr>
-		<td>Käy luennoilla</td>
-		<td>roskakoriin</td>
-	</tr>
-	<tr>
-		<th>Ostoslista</th>
-		<th><!-- kiireellisyys --></th>
-	</tr>
-	<tr>
-		<td>Maito</td>
-		<td>megatärkeä</td>
-	</tr>
-	<tr>
-		<td>Perunamuusi</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Karjalanpiirakka</td>
-		<td>meh</td>
-	</tr>
-	<tr>
-		<td>Hirsitalo</td>
-		<td>roskakoriin</td>
-	</tr>
-	<tr>
-		<th>Pois alta</th>
-		<th><!-- kiireellisyys --></th>
-	</tr>
-	<tr>
-		<td>Dokkaridoku</td>
-		<td>megatärkeä</td>
-	</tr>
-	<tr>
-		<td>Juo maitoa</td>
-		<td>megatärkeä</td>
-	</tr>
-	<tr>
-		<th>Katso</th>
-		<th><!-- kiireellisyys --></th>
-	</tr>
-	<tr>
-		<td>Dokkaridoku</td>
-		<td>megatärkeä</td>
-	</tr>
-	<tr>
-		<td>Marssien Marsiin</td>
-		<td>meh</td>
-	</tr>
+<?php
+	$pC("Askareet");
+
+	echo "<tbody>\n";
+	$usedCats = array();
+	foreach ($this->params["tasks"] as $t) {
+		foreach ($t->categories as $c) {
+			if (!isset($usedCats[$c])) {
+				$usedCats[$c] = array();
+			}
+			$usedCats[$c][] = $t;
+		}
+		if (count($t->categories) !== 0) { continue; }
+		$pT($t);
+	}
+	echo "</tbody>\n";
+
+	foreach ($this->params["categories"] as $c) {
+		if (!isset($usedCats[$c->id])) { continue; }
+		$pC($c->name);
+		echo "<tbody>\n";
+		foreach ($usedCats[$c->id] as $t) {
+			$pT($t);
+		}
+		echo "</tbody>\n";
+	}
+?>
 </table>

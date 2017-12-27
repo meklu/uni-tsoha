@@ -43,7 +43,7 @@ class Model {
 		$ret = array();
 
 		foreach ($rows as $row) {
-			$ret[] = new static($row);
+			$ret[$row["id"]] = new static($row);
 		}
 
 		return $ret;
@@ -59,7 +59,7 @@ class Model {
 		$ret = array();
 
 		foreach ($rows as $row) {
-			$ret[] = new static($row);
+			$ret[$row["id"]] = new static($row);
 		}
 
 		return $ret;
