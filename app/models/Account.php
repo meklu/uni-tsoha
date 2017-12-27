@@ -67,6 +67,18 @@ class Account extends Model {
 	}
 
 	static function delete($id) {
-		return static::_delete($id);
+		$db = Database::conn();
+
+		/* Varmistetaan, että järjestelmään jää ainakin yksi ylläpitäjä */
+		$q = $db->prepare("DELETE FROM Account WHERE id = :id  AND (SELECT count(*) FROM Account WHERE id != :id AND admin = true LIMIT 1) > 0 RETURNING 1 AS one");
+		$q->bindValue(":id", $id, PDO::PARAM_INT);
+		$q->execute();
+
+		$row = $q->fetch(PDO::FETCH_ASSOC);
+		if (!$row) {
+			return false;
+		}
+
+		return true;
 	}
 }
