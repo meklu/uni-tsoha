@@ -4,7 +4,7 @@ $this->exportParam("title", "Askareet");
 $pT = function ($t) {
 ?>
 	<tr>
-		<td><?= htmlspecialchars($t->task) ?></td>
+		<td><a href="<?= BASE_DIR . REQ_URL . "/{$t->id}" ?>"><?= htmlspecialchars($t->task) ?></a></td>
 		<td><?= htmlspecialchars($this->params["priorities"][$t->priority_id]->name) ?></td>
 	</tr>
 <?php
