@@ -94,8 +94,9 @@ class CategoryController extends Controller {
 		}
 
 		$attr = array();
-		$c->name = $_POST["name"];
+		$attr["name"] = $_POST["name"];
 
+		$c->setAttr($attr);
 		$err = $c->errors();
 
 		if (count($err) === 0) {

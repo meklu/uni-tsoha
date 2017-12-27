@@ -10,7 +10,7 @@ if ($a) {
 ?>
 <h1><?= htmlspecialchars($this->exportParams["title"]) ?></h1>
 <p><a href="<?= BASE_DIR ?>/accounts">← Takaisin</a></p>
-<p><a href="<?= BASE_DIR ?>/accounts/<?= $a->id ?>">Peru</a></p>
+<p><a href="<?= BASE_DIR ?>/accounts/<?= $a->id ?>">Peru ×</a></p>
 <?php if ($a) { ?>
 <form action="<?= BASE_DIR . REQ_URL ?>" method="post">
 	<p><label>Nimimerkki <br /><input name="nick" type="text" value="<?= htmlspecialchars($this->pA("nick", $a)) ?>" /></label></p>

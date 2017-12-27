@@ -86,4 +86,65 @@ class TaskController extends Controller {
 		}
 		echo Redirect::view($path, $data)->render();
 	}
+
+	public static function editview($id) {
+		$user = static::check_logged_in();
+		$t = Task::find($id);
+		if ($t && $t->account_id != $user->id) {
+			$t = null;
+		}
+		$p = null;
+		if (!$t) {
+			http_response_code(404);
+		} else {
+			Task::retrieveCategories($t, false);
+		}
+		$bv = new View("base", array(
+			"content" => new View("tasks/edit", array(
+				"task" => $t,
+				"categories" => Category::allForAccount($user->id),
+				"priorities" => Priority::allForAccount($user->id),
+			)),
+		));
+		echo $bv->render();
+	}
+
+	public static function edit($id) {
+		$user = static::check_logged_in();
+		$t = Task::find($id);
+		if ($t && $t->account_id != $user->id) {
+			$t = null;
+		}
+		if (!$t) {
+			http_response_code(404);
+		}
+
+		$attr = array();
+		$attr["task"] = $_POST["task"];
+		$attr["priority_id"] = $_POST["priority_id"];
+		$attr["account_id"] = $user->id;
+
+		$attr["categories"] = array_values($_POST["categories"]);
+		foreach ($attr["categories"] as $k => $v) {
+			$attr["categories"][$k] = intval($v);
+		}
+
+		$t->setAttr($attr);
+		$err = $t->errors();
+
+		if (count($err) === 0) {
+			Task::update($t);
+		}
+
+		$path = "/tasks/{$t->id}";
+		$data = array();
+		if (count($err) === 0) {
+			$data["success"] = array("Muokkaus onnistui!");
+		} else {
+			$path .= "/edit";
+			$data["errors"] = $err;
+			$data["attr"] = $attr;
+		}
+		echo Redirect::view($path, $data)->render();
+	}
 }

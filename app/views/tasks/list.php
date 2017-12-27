@@ -1,6 +1,6 @@
 <?php
-/* TODO: Ryhmittely, järjestys, jne. */
 $this->exportParam("title", "Askareet");
+$this->params["priorities"][null] = new Priority(array("name" => "", "priority" => 0));
 
 $sortT = function ($a, $b) {
 	$ap = $this->params["priorities"][$a->priority_id]->priority;

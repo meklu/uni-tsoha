@@ -8,7 +8,7 @@ if ($p) {
 ?>
 <h1><?= htmlspecialchars($this->exportParams["title"]) ?></h1>
 <p><a href="<?= BASE_DIR ?>/priorities">← Takaisin</a></p>
-<p><a href="<?= BASE_DIR ?>/priorities/<?= $p->id ?>">Peru</a></p>
+<p><a href="<?= BASE_DIR ?>/priorities/<?= $p->id ?>">Peru ×</a></p>
 <?php if ($p) { ?>
 <form action="<?= BASE_DIR . REQ_URL ?>" method="post">
 	<p><label>Nimi <br /><input name="name" type="text" value="<?= htmlspecialchars($this->pA("name", $p)) ?>" /></label></p>

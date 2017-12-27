@@ -137,7 +137,7 @@ class AccountController extends Controller {
 		}
 		$attr = array();
 		$acc = Account::find($id);
-		$acc->nick = $_POST["nick"];
+		$attr["nick"] = $_POST["nick"];
 		if (isset($_POST["password"]) && $_POST["password"] !== "") {
 			$acc->password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 			$err = array_merge($err, Account::_validate_plaintext_password($_POST["password"]));
@@ -145,9 +145,10 @@ class AccountController extends Controller {
 			$_POST["password"] = "";
 		}
 		if ($user->admin) {
-			$acc->admin = (isset($_POST["admin"]) && $_POST["admin"]) ? true : false;
+			$attr["admin"] = (isset($_POST["admin"]) && $_POST["admin"]) ? true : false;
 		}
 
+		$a->setAttr($attr);
 		$err = array_merge($err, $acc->errors());
 
 		if (count($err) === 0) {

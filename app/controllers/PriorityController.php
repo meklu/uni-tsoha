@@ -95,9 +95,10 @@ class PriorityController extends Controller {
 		}
 
 		$attr = array();
-		$p->name = $_POST["name"];
-		$p->priority = intval($_POST["priority"]);
+		$attr["name"] = $_POST["name"];
+		$attr["priority"] = intval($_POST["priority"]);
 
+		$p->setAttr($attr);
 		$err = $p->errors();
 
 		if (count($err) === 0) {

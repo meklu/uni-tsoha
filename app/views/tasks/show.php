@@ -9,6 +9,8 @@ if ($t) {
 ?>
 <h1><?= htmlspecialchars($this->exportParams["title"]) ?></h1>
 <p><a href="<?= BASE_DIR ?>/tasks">← Takaisin</a></p>
+<p><a href="<?= BASE_DIR . REQ_URL ?>/edit">Muokkaa ✎</a></p>
+<p><a href="<?= BASE_DIR . REQ_URL ?>/delete">Poista 🗑</a></p>
 <?php if ($t) { ?>
 	<p><label><p>Askare</p><p><?= htmlspecialchars($this->pA("task", $t)) ?></p></label></p>
 	<p>
