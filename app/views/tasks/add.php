@@ -13,7 +13,7 @@ $this->exportParam("title", "Luo askare");
 <?php
 			foreach ($this->params["priorities"] as $p) {
 ?>
-				<option value="<?= $p->id ?>"<?= "" !== $this->pA("priority_id") ? " selected=\"selected\"" : "" ?>><?= htmlspecialchars($p->name) . " [{$p->priority}]" ?></option>
+				<option value="<?= $p->id ?>"<?= $p->id === intval($this->pA("priority_id")) ? " selected=\"selected\"" : "" ?>><?= htmlspecialchars($p->name) . " [{$p->priority}]" ?></option>
 <?php
 			}
 ?>
