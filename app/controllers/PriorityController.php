@@ -102,7 +102,10 @@ class PriorityController extends Controller {
 		$err = $p->errors();
 
 		if (count($err) === 0) {
-			Priority::update($p);
+			$ret = Priority::update($p);
+			if (!$ret) {
+				$err[] = "Muokkaus epäonnistui!";
+			}
 		}
 
 		$path = "/priorities/{$p->id}";

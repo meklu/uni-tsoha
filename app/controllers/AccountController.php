@@ -148,11 +148,14 @@ class AccountController extends Controller {
 			$attr["admin"] = (isset($_POST["admin"]) && $_POST["admin"]) ? true : false;
 		}
 
-		$a->setAttr($attr);
+		$acc->setAttr($attr);
 		$err = array_merge($err, $acc->errors());
 
 		if (count($err) === 0) {
-			Account::update($acc);
+			$ret = Account::update($acc);
+			if (!$ret) {
+				$err[] = "Muokkaus epäonnistui!";
+			}
 		}
 
 		$path = "/accounts/{$acc->id}";

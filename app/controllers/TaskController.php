@@ -139,7 +139,10 @@ class TaskController extends Controller {
 		$err = $t->errors();
 
 		if (count($err) === 0) {
-			Task::update($t);
+			$ret = Task::update($t);
+			if (!$ret) {
+				$err[] = "Muokkaus epäonnistui!";
+			}
 		}
 
 		$path = "/tasks/{$t->id}";

@@ -100,7 +100,10 @@ class CategoryController extends Controller {
 		$err = $c->errors();
 
 		if (count($err) === 0) {
-			Category::update($c);
+			$ret = Category::update($c);
+			if (!$ret) {
+				$err[] = "Muokkaus epäonnistui!";
+			}
 		}
 
 		$path = "/categories/{$c->id}";

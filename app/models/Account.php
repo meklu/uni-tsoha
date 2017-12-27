@@ -59,26 +59,41 @@ class Account extends Model {
 	}
 
 	static function update($object) {
-		return static::_update($object, array(
+		$db = Database::conn();
+		if (!$db->beginTransaction()) {
+			return false;
+		}
+		$r = true;
+		$ret = static::_update($object, array(
 			"nick" => PDO::PARAM_STR,
 			"password" => PDO::PARAM_STR,
 			"admin" => PDO::PARAM_BOOL,
 		));
+		$r = $r && $ret;
+		/* Varmistetaan, että järjestelmään jää ainakin yksi ylläpitäjä */
+		if (null === static::_findByField("admin", true, PDO::PARAM_BOOL)) {
+			$db->rollBack();
+			return null;
+		}
+		$r = $r && $db->commit();
+		if (!$r) {
+			$ret = null;
+		}
+		return $ret;
 	}
 
 	static function delete($id) {
 		$db = Database::conn();
-
-		/* Varmistetaan, että järjestelmään jää ainakin yksi ylläpitäjä */
-		$q = $db->prepare("DELETE FROM Account WHERE id = :id  AND (SELECT count(*) FROM Account WHERE id != :id AND admin = true LIMIT 1) > 0 RETURNING 1 AS one");
-		$q->bindValue(":id", $id, PDO::PARAM_INT);
-		$q->execute();
-
-		$row = $q->fetch(PDO::FETCH_ASSOC);
-		if (!$row) {
+		if (!$db->beginTransaction()) {
 			return false;
 		}
-
-		return true;
+		$ret = static::_delete($id);
+		/* Varmistetaan, että järjestelmään jää ainakin yksi ylläpitäjä */
+		if (null === static::_findByField("admin", true, PDO::PARAM_BOOL)) {
+			$db->rollBack();
+			return false;
+		}
+		$ret = $ret && $db->commit();
+		return $ret;
 	}
 }
