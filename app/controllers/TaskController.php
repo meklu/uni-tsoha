@@ -59,6 +59,9 @@ class TaskController extends Controller {
 		$attr["priority_id"] = $_POST["priority_id"];
 		$attr["account_id"] = $user->id;
 
+		if (!isset($_POST["categories"])) {
+			$_POST["categories"] = array();
+		}
 		$attr["categories"] = array_values($_POST["categories"]);
 		foreach ($attr["categories"] as $k => $v) {
 			$attr["categories"][$k] = intval($v);
@@ -124,6 +127,9 @@ class TaskController extends Controller {
 		$attr["priority_id"] = $_POST["priority_id"];
 		$attr["account_id"] = $user->id;
 
+		if (!isset($_POST["categories"])) {
+			$_POST["categories"] = array();
+		}
 		$attr["categories"] = array_values($_POST["categories"]);
 		foreach ($attr["categories"] as $k => $v) {
 			$attr["categories"][$k] = intval($v);

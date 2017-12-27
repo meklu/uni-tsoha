@@ -50,7 +50,11 @@ class Task extends Model {
 		}
 		$catstr = implode(", ", $catstr);
 		/* Poista vanhat relaatiot */
-		$q = $db->prepare("DELETE FROM TaskCategory WHERE task_id IN (SELECT id FROM Task WHERE account_id = :account_id AND id = :task_id LIMIT 1) AND category_id NOT IN (SELECT id FROM Category WHERE account_id = :account_id AND id IN ({$catstr}))");
+		$qstr = "DELETE FROM TaskCategory WHERE task_id IN (SELECT id FROM Task WHERE account_id = :account_id AND id = :task_id LIMIT 1)";
+		if (count($task->categories) > 0) {
+			$qstr .= " AND category_id NOT IN (SELECT id FROM Category WHERE account_id = :account_id AND id IN ({$catstr}))";
+		}
+		$q = $db->prepare($qstr);
 		$q->bindValue(":task_id", $task->id, PDO::PARAM_INT);
 		$q->bindValue(":account_id", $task->account_id, PDO::PARAM_INT);
 		$ci = 0;
