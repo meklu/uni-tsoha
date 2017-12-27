@@ -150,4 +150,12 @@ class Task extends Model {
 		}
 		return $task;
 	}
+
+	static function delete($id) {
+		return static::_delete($id);
+	}
+
+	static function deleteForAccount($id, $account_id) {
+		return static::_deleteWhere($id, "account_id", $account_id, PDO::PARAM_INT);
+	}
 }

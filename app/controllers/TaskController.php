@@ -147,4 +147,18 @@ class TaskController extends Controller {
 		}
 		echo Redirect::view($path, $data)->render();
 	}
+
+	public static function delete($id) {
+		$user = static::check_logged_in();
+
+		$path = "/tasks";
+		$res = Task::deleteForAccount($id, $user->id);
+		$data = array();
+		if ($res) {
+			$data["success"] = array("Askare poistettiin onnistuneesti!");
+		} else {
+			$data["errors"] = array("Askaretta ei voitu poistaa!");
+		}
+		echo Redirect::view($path, $data)->render();
+	}
 }
