@@ -1,6 +1,17 @@
 <?php
 /* TODO: Ryhmittely, järjestys, jne. */
 $this->exportParam("title", "Askareet");
+
+$sortT = function ($a, $b) {
+	$ap = $this->params["priorities"][$a->priority_id]->priority;
+	$bp = $this->params["priorities"][$b->priority_id]->priority;
+	$ret = $bp - $ap;
+	if ($ret === 0) {
+		$ret = strnatcasecmp($a->task, $b->task);
+	}
+	return $ret;
+};
+
 $pT = function ($t) {
 ?>
 	<tr>
@@ -27,7 +38,10 @@ $pC = function ($title) {
 	$pC("Askareet");
 
 	echo "<tbody>\n";
+
+	usort($this->params["tasks"], $sortT);
 	$usedCats = array();
+
 	foreach ($this->params["tasks"] as $t) {
 		foreach ($t->categories as $c) {
 			if (!isset($usedCats[$c])) {
@@ -38,6 +52,7 @@ $pC = function ($title) {
 		if (count($t->categories) !== 0) { continue; }
 		$pT($t);
 	}
+
 	echo "</tbody>\n";
 
 	foreach ($this->params["categories"] as $c) {
