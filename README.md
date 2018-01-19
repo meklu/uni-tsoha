@@ -1,7 +1,5 @@
 # Tietokantasovelluksen harjoitustyö
 
-# EI VALMIS! Lopullinen dokumentaatio pitää vielä tehdä, valmis tod. näk. 28.12.
-
 * [Linkki sovellukseen](https://melker.users.cs.helsinki.fi/uni-tsoha/)
 * [Linkki dokumentaatioon](https://github.com/meklu/uni-tsoha/blob/master/doc/dokumentaatio.pdf)
 
